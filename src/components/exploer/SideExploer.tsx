@@ -15,10 +15,10 @@ import settingDbIcon from '@/resources/interface/database-config.png';
 import accessIcon    from '@/resources/interface/access.png';
 import serverIcon    from '@/resources/interface/server.png';
 
-
 import { ScrollArea } from "../ui/scroll-area";
 import Link from "next/link";
 import TreeView from "../treeview/TreeView";
+import { cn } from "@/lib/utils";
 
 const data: any = [
     {
@@ -74,21 +74,26 @@ const data: any = [
 
 
 export default function SideExploer () {
+    const [selected, setSelected] = React.useState('')
+
+    const selectHandler = (value: string) => {
+        setSelected(value)
+    }
+
     return (
         <ScrollArea className="max-w-full h-full">
-            {/* defaultValue={["item-1", "item-2"]} */}
             <Accordion type="multiple">
                 <AccordionItem value="item-1" className="shadow-md bg-gradient-to-b from-[#4b4b4b] to-[#494949] text-white">
                     <AccordionTrigger className="px-4 font-bold text-[#e8e8e8] text-[13px] hover:no-underline">Device</AccordionTrigger>
                     <AccordionContent>
                         <AccordionContentWrapper>
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" />
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" />
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" />
+                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
                         </AccordionContentWrapper>
                     </AccordionContent>
                 </AccordionItem>
@@ -97,7 +102,8 @@ export default function SideExploer () {
                     <AccordionContent>
                         <AccordionContentWrapper>
                             <TreeView 
-                                data={data} />
+                                data={data}
+                                onSelect={selectHandler} />
                         </AccordionContentWrapper>
                     </AccordionContent>
                 </AccordionItem>
@@ -105,12 +111,12 @@ export default function SideExploer () {
                     <AccordionTrigger className="px-4 font-bold text-[#e8e8e8] text-[13px] hover:no-underline">System Management</AccordionTrigger>
                     <AccordionContent>
                         <AccordionContentWrapper>
-                            <AccordionContentListItem icon={addUserIcon}   value="Device settings"  href="/admin/user" />
-                            <AccordionContentListItem icon={settingDbIcon} value="Repository settings"  href="/admin/repository" />
-                            <AccordionContentListItem icon={computerIcon}  value="User settings" href="/admin/device" />
-                            <AccordionContentListItem icon={accessIcon}    value="Authority settings" href="/admin/authority" />
-                            <AccordionContentListItem icon={accessIcon}    value="View logs" href="/admin/authority" />
-                            <AccordionContentListItem icon={accessIcon}    value="System status" href="/admin/authority" />
+                            <AccordionContentListItem icon={addUserIcon} value="Device settings" href="/admin/user" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={settingDbIcon} value="Repository settings" href="/admin/repository" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={computerIcon} value="User settings" href="/admin/device" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={accessIcon} value="Authority settings" href="/admin/authority" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={accessIcon} value="View logs" href="/admin/authority" selected={selected} onSelect={selectHandler} />
+                            <AccordionContentListItem icon={accessIcon} value="System status" href="/admin/authority" selected={selected} onSelect={selectHandler} />
                         </AccordionContentWrapper>
                     </AccordionContent>
                 </AccordionItem>
@@ -119,11 +125,13 @@ export default function SideExploer () {
     )
 }
 
-
-function AccordionContentListItem ({icon, value, href="#", isOnline=false}: {icon: StaticImageData, value: string, isOnline?: boolean, href?: string}) {
+function AccordionContentListItem ({icon, value, href="#", isOnline=false, selected, onSelect }: {icon: StaticImageData, value: string, isOnline?: boolean, href?: string , className?: string, selected: string, onSelect: (value: string) => void }) {
+    const selectHandler = () => {
+        onSelect(value)
+    }
     return (
-        <Link href={href}>
-            <div className="flex items-center space-x-2 p-1 rounded hover:bg-[#686f76] cursor-pointer">
+        <Link href={href} >
+            <div className={`flex items-center space-x-2 p-1 rounded hover:bg-[#686f76] cursor-pointer ${selected === value ? "bg-[#686f76]" :'bg-none'} `} onClick={selectHandler}>
                 <Image src={icon} alt="" width={12} height={15} />
                 <p className="text-[12px]">{value}</p>
             </div>
