@@ -12,9 +12,9 @@ import Image, { StaticImageData } from "next/image";
 export default function Home() {
   return (
     <div className="p-[40px]">
-      <h1 className="text-[#e8e8e8] font-bold text-[32px] pb-5" style={{borderBottom: '1px solid gray'}}>Welcome to OpenSDMS</h1>
-
+      <h1 className="text-[#e8e8e8] font-bold text-[32px] pb-1" style={{borderBottom: '1px solid gray'}}>Welcome to OpenSDMS</h1>
       <div className="flex pt-14 space-x-[120px]">
+
 	  	<div className="space-y-7">
 		  <h2 className="text-[18px] text-[#e8e8e8] font-semibold">Device</h2>
 		  <div className="space-y-6">

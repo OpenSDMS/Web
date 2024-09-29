@@ -16,9 +16,9 @@ import accessIcon    from '@/resources/interface/access.png';
 import serverIcon    from '@/resources/interface/server.png';
 
 import { ScrollArea } from "../ui/scroll-area";
-import Link from "next/link";
-import TreeView from "../treeview/TreeView";
-import { cn } from "@/lib/utils";
+import Link           from "next/link";
+import TreeView       from "../treeview/TreeView";
+import { useDeivceHook, Device } from "@/hooks/useDeviceHook";
 
 const data: any = [
     {
@@ -74,8 +74,9 @@ const data: any = [
 
 
 export default function SideExploer () {
-    const [selected, setSelected] = React.useState('')
-
+    const [selected, setSelected] = React.useState('');
+    const devices: Device[] = useDeivceHook();
+    
     const selectHandler = (value: string) => {
         setSelected(value)
     }
@@ -87,13 +88,15 @@ export default function SideExploer () {
                     <AccordionTrigger className="px-4 font-bold text-[#e8e8e8] text-[13px] hover:no-underline">Device</AccordionTrigger>
                     <AccordionContent>
                         <AccordionContentWrapper>
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC702)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Particle Counter(UPLC705)" selected={selected} onSelect={selectHandler} />
-                            <AccordionContentListItem icon={computerIcon} value="Agilent (UPLC702)" selected={selected} onSelect={selectHandler} />
+                            {devices && devices.map(device => 
+                                <AccordionContentListItem 
+                                    icon={computerIcon} 
+                                    value={device.name} 
+                                    selected={selected} 
+                                    onSelect={selectHandler} 
+                                    href={`/device/${device.id}`}
+                                />
+                            )}
                         </AccordionContentWrapper>
                     </AccordionContent>
                 </AccordionItem>
