@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import SideExploer from "@/components/exploer/SideExploer";
+import Header from "@/components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,11 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased flex h-[100vh] overflow-hidden`}>
-        <div className="min-w-[285px] h-full">
-          <SideExploer />
-        </div>
-        <div className="w-full bg-[#2c2c2c] h-full p-3">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased h-[100vh] overflow-hidden`}>
+        <Header />
+        <div className="">
           {children}
         </div>
       </body>
