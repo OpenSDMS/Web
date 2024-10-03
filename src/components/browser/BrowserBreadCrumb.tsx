@@ -12,9 +12,9 @@ export default function BrowserBreadCrumb () {
         <div className="py-[34px]">
             <div className="px-[32px]">
                 <Breadcrumb>
-                    <BreadcrumbList className="text-[18px] font-semibold">
+                    <BreadcrumbList className="text-[18px] font-normal">
                         <BreadcrumbItem>
-                            <BreadcrumbLink href="/" >SDMS</BreadcrumbLink>
+                            <BreadcrumbLink href="/">SDMS</BreadcrumbLink>
                         </BreadcrumbItem>
                         <BreadcrumbSeparator />
                         <BreadcrumbItem>

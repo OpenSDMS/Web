@@ -4,6 +4,7 @@ import { useState } from "react";
 import BrowserMainHeader from "./BrowserMainHeader";
 import BrowserFunctionHeader from "./BrowserFunctionHeader";
 import BrowserBreadCrumb from "./BrowserBreadCrumb";
+import BrowserTable from "./table/BrowserTable";
 
 export default function Browser () {
     
@@ -14,6 +15,7 @@ export default function Browser () {
             <BrowserMainHeader title="Agilent UPLC702" />
             <BrowserFunctionHeader />
             <BrowserBreadCrumb />
+            <BrowserTable />
         </div>
     )
 }
