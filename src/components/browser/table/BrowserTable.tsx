@@ -2,7 +2,6 @@
 "use client"
 
 import {
-    ColumnDef,
     flexRender,
     getCoreRowModel,
     useReactTable,
@@ -18,7 +17,7 @@ import {
 } from "@/components/ui/table"
 
 import { columns } from "./Columns";
-   
+
 const tempData = [
     { type: "file", name: "rawdata01.erp", updatedAt: "5월 1일",  modifier: "Min, Daehong" },
     { type: "file", name: "rawdata02.erp", updatedAt: "3월 1일",  modifier: "Min, Daehong" },
@@ -38,14 +37,15 @@ export default function BrowserTable () {
     return (
         <div>
             <div className="px-[32px]">
-            <Table>
+            <Table style={{ tableLayout: 'fixed', width: '100%' }}>
                 <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
                     <TableRow key={headerGroup.id}>
                     {headerGroup.headers.map((header) => {
                         return (
-                        <TableHead key={header.id} className="font-bold text-[#323130] text-[14px]">
-                            {header.isPlaceholder
+                        <TableHead key={header.id} 
+                            className={`font-bold text-[#323130] text-[14px] w-[${header.getSize()}px]`}>
+                            { header.isPlaceholder
                             ? null
                             : flexRender(
                                 header.column.columnDef.header,

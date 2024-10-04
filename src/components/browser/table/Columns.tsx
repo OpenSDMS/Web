@@ -1,8 +1,8 @@
 
 "use client"
 
-import { ColumnDef } from "@tanstack/react-table";
-
+import Image from "next/image";
+import documentIcon from '@/resources/document.svg';
 
 export type ColumnsType = {
     type: string,
@@ -11,21 +11,21 @@ export type ColumnsType = {
     modifier: string
 }
 
-export const columns: ColumnDef<ColumnsType>[] = [
+export const columns = [
     {
         accessorKey: "type",
-        header: "type"
+        header: () => <Image src={documentIcon} alt="" className="w-[20px] h-[16px]" />,
     },
     {
         accessorKey: "name",
-        header: "이름"
+        header: "이름",
     },
     {
         accessorKey: "updatedAt",
-        header: "수정된 날짜"
+        header: "수정된 날짜",
     },
     {
         accessorKey: "modifier",
-        header: "수정한 사람"
+        header: "수정한 사람",
     },
 ];
