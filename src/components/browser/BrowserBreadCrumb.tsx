@@ -19,7 +19,7 @@ export default function BrowserBreadCrumb ({path}: {path: string[]}) {
                                     <BreadcrumbLink href="/">{p}</BreadcrumbLink>
                                 </BreadcrumbItem>
                                 {/* <BreadcrumbSeparator /> */}
-
+                                
                             </>
                         )}
                     </BreadcrumbList>

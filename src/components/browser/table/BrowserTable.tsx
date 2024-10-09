@@ -17,20 +17,19 @@ import {
 } from "@/components/ui/table"
 
 import { columns } from "./Columns";
+import { useEffect } from "react";
+import { cn } from "@/lib/utils";
 
-const tempData = [
-    { type: "file", name: "rawdata01.erp", updatedAt: "5월 1일",  modifier: "Min, Daehong" },
-    { type: "file", name: "rawdata02.erp", updatedAt: "3월 1일",  modifier: "Min, Daehong" },
-    { type: "file", name: "rawdata01.erp", updatedAt: "7월 1일",  modifier: "Min, Daehong" },
-    { type: "file", name: "rawdata01.erp", updatedAt: "9월 1일",  modifier: "Min, Daehong" },
-    { type: "file", name: "rawdata01.erp", updatedAt: "11월 1일", modifier: "Min, Daehong" },
-];
-
-export default function BrowserTable () {
+export default function BrowserTable ({data}: {data: any}) {
 
     const table = useReactTable({
-        data: tempData,
+        data: data,
         columns,
+        initialState: {
+            columnVisibility: {
+                id: false
+            }
+        },
         getCoreRowModel: getCoreRowModel()
     });
 
@@ -40,11 +39,12 @@ export default function BrowserTable () {
             <Table style={{ tableLayout: 'fixed', width: '100%' }}>
                 <TableHeader>
                 {table.getHeaderGroups().map((headerGroup) => (
-                    <TableRow key={headerGroup.id}>
+                    <TableRow key={headerGroup.id} className="w-full">
                     {headerGroup.headers.map((header) => {
                         return (
                         <TableHead key={header.id} 
-                            className={`font-bold text-[#323130] text-[14px] w-[${header.getSize()}px]`}>
+                            style={{ width: `${header.getSize()}px` }}
+                            className={cn(`font-bold text-[#323130] text-[13px]`)}>
                             { header.isPlaceholder
                             ? null
                             : flexRender(
@@ -63,7 +63,7 @@ export default function BrowserTable () {
                         key={row.id}
                         data-state={row.getIsSelected() && "selected"}>
                         {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id} className="text-[14px] py-[12px]">
+                        <TableCell key={cell.id} className="text-[14px] py-[12px]" onClick={() => console.log(row.original.id)}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                         </TableCell>
                         ))}
