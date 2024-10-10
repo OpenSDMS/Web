@@ -10,8 +10,8 @@ export interface Device {
 
 }
 
-export function useDeivceHook () {
-    const [devices, setDevices] = useState<Device[]>([]);
+export function useFetchObject (target='/') {
+    const [objects, setObjects] = useState<Device[]>([]);
     
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_API_HOST as string}/api/object/device`).then((response) => {
@@ -22,9 +22,9 @@ export function useDeivceHook () {
                     createdAt: `${(date.getMonth() + 1)}월 ${date.getDate()}일`
                 }
             });
-            setDevices(response.data.result);
+            setObjects(response.data.result);
         });
     }, []);
 
-    return devices;
+    return objects;
 }
