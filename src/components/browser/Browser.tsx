@@ -10,13 +10,9 @@ import { useFetchObject } from "@/hooks/useFetchObject";
 
 export default function Browser () {
 
-    const [data, setData] = useState<any[]>();
+    const [data, setData] = useState(useFetchObject());
     const [path, setPath] = useState<string[]>(["모든 장비"]);
     
-    useEffect(() => {
-        setData(useFetchObject());
-    }, []);
-
     return (
         <div>
             <BrowserMainHeader title="SDMS Cluster 01" />

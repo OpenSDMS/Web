@@ -11,7 +11,7 @@ export interface Device {
 }
 
 export function useFetchObject (target='/') {
-    const [objects, setObjects] = useState<Device[]>([]);
+    const [objects, setObjects] = useState<Device[]>();
     
     useEffect(() => {
         axios.get(`${process.env.NEXT_PUBLIC_API_HOST as string}/api/object/device`).then((response) => {
